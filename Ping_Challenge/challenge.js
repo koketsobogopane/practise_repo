@@ -6,37 +6,44 @@
 // The user must also input the position of the pong ball
 // An example of a user input: “A2 2R 2U D4” -> the ping ball is at A2 and the movement is 2 blocks right and then 2 blocks up, the pong
 
-function playGame ( playerInput ) {
-    const moves = playerInput.split(' ')
+/**
+ * Creates the grid for the game as an array
+ * @returns {Array}
+ */
+const grid = () => {
     const horizontalLabel = [ 'A', 'B', 'C', 'D', 'E']
-    const index = {
-        'A':1,'B':2,'C':3,'D':4,'E':5 ,
-    }
-const pad = '.'
+    const verticalLabel   = ['1','2','3','4','5'];
 
-const grid = [horizontalLabel]
+    const pad = '.'
 
-for ( let i = 0; i < 5; i++) {
-    const row = [i+1]
-    for (let ii = 0; ii< 5; ii++) {
-        row.push(pad)
-    }
+    const grid = []
+
+    const topRow = [' ',...horizontalLabel]
+    grid.push(topRow)
+
+    for ( let row of verticalLabel ) {
+        const columnArr = [ row ]
+        for ( let col of horizontalLabel) {
+            columnArr.push(pad)
+        }
   
-    grid.push(row)
+        grid.push(columnArr)
     
+    }
+
+    return grid
 }
 
-grid.push(horizontalLabel)
-
-grid[moves[0][1]][index[moves[0][0]]] = 'P'
 
 
-console.log(grid)
+function playGame ( playerInput ) {
 
-grid[moves[0][1]][moves[1][0]] = 'P'
-
-console.log(grid)
+    const playGround = grid()
+    console.log (playGround)
+ 
 
 }
 
-playGame('A2 2R 2U D4')
+
+
+playGame()
